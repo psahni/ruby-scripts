@@ -1,5 +1,6 @@
 ##############################################################
 # Run a remote command on the remote server
+# Dependency - net-ssh gem
 ##############################################################
 
 require 'rubygems'
