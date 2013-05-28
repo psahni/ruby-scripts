@@ -6,9 +6,9 @@
 require 'rubygems'
 require 'net/ssh'
 
-@hostname = "staging.inxero.com"
-@username = "inxeroadmin"
-@password = "3PUth4Du"
+@hostname = "test.example.com"
+@username = "username"
+@password = "password"
 @cmd = "ls -al"
 
 
