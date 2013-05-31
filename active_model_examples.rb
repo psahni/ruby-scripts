@@ -25,3 +25,9 @@ end
 message = Person.new(:name => "Prashant Sahni", :email => "prashantsahni5@gmail.com", :content => "Universe is so big")
 
 p message.valid?
+
+
+
+# References
+#http://yehudakatz.com/2010/01/10/activemodel-make-any-ruby-object-feel-like-activerecord/
+#http://www.rubyinside.com/rails-3-0s-activemodel-how-to-give-ruby-classes-some-activerecord-magic-2937.html
