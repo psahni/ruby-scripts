@@ -3,7 +3,7 @@
 
 
 
-# Works With Rails
+# Works With Rails, if you want to work with DateTime, does not works with Simple Date
 #~ def distance_between(start_date, end_date)
     #~ difference = end_date.to_i - start_date.to_i  # Total Secs
     #~ seconds    =  difference % 60                 # Remaining Secs
@@ -21,7 +21,7 @@
 #  distance_between(d1, d2)
  
  
- ## Simple Date Diff Ruby
+ ## Simple Date Diff Ruby, works with Rails Also
  
   d1 = Date.new(2012, 05, 12)  # Also works with DateTime, d1=DateTime.now;d1.day;d1.month;d1.year
   d2 = Date.today
