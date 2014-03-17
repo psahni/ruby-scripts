@@ -5,7 +5,7 @@ module Calculator
   extend self
   
  	def calculate_tax(item)
- 		get_item_tax_type(item) * item.price()
+		item.tax_type() * item.price() 		#get_item_tax_type(item) * item.price() 
  	end
  	 	
  	private

@@ -4,7 +4,9 @@ class Main
 
 	def self.run!
 		rover1 = Rover.new(Coordinates.new(1,2), 'N', 'LMLMLMLMM')
-		
+		                                  # Start coordinates
+                                      # Direction
+                                      # Instruction
 		puts "Input: " + rover1.current_position
 		rover1.process_instruction_array
 
@@ -22,3 +24,8 @@ end
 
 Main.run!
 
+
+# 3 Classes used
+# 1. Rover
+# 2. Coordinates
+# 3. Direction
