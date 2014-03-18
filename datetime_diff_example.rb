@@ -49,3 +49,21 @@ def age
   now = Time.now.utc.to_date
   now.year - birthday.year - (birthday.to_date.change(:year => now.year) > now ? 1 : 0)
 end
+
+
+#irb(main):015:0> t2 = Time.parse("28/02/2014")
+#=> 2014-02-28 00:00:00 +0530
+#irb(main):016:0> t1 = Time.parse("05/12/1984")
+#=> 1984-12-05 00:00:00 +0530
+#irb(main):017:0> (t2-t1).to_i
+#=> 922492800
+#irb(main):018:0> (t2-t1).to_i/(365)
+#=> 2527377
+#irb(main):019:0> (t2-t1).to_i/(365*24)
+#=> 105307
+#irb(main):020:0> (t2-t1).to_i/(365*24*60)
+#=> 1755
+#irb(main):021:0> (t2-t1).to_i/(365*24*60*60)
+#=> 29
+#irb(main):022:0> 
+
