@@ -23,3 +23,7 @@ cart.add_to_cart(item2)
 
 #puts cart.to_s
 puts cart.print_receipt
+
+
+#classes
+# ItemType, Item, Calculator, TaxType, Cart, TaxType

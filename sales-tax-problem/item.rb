@@ -29,7 +29,7 @@ class Item
 	end
 
 	def exempted?
-	 !!exempted
+	 [ItemType::BOOK,  ItemType::MEDICAL, ItemType::FOOD].include?(item_type)
 	end
 		
 	def price_with_tax()
@@ -44,6 +44,18 @@ class Item
 		@sales_tax
 	end
 	
+	def tax_type
+		if imported? && !exempted?
+ 	  	 TaxType::BOTH
+ 	  elsif imported? && exempted?
+ 	     TaxType::IMPORTED
+ 	  elsif imported? && exempted?
+ 	  	TaxType::BASIC
+ 	  else
+ 	  	TaxType::NA
+ 	  end
+	end
+
  
  	private
  	
