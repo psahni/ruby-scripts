@@ -17,7 +17,7 @@ def get_sub_arrays(arr)
   p "No of sub arrays  - #{ count }"
 end
 
-
+#http://www.geeksforgeeks.org/find-subarray-with-given-sum/
 
 # Method 2
 

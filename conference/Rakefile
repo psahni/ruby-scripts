@@ -1,0 +1,42 @@
+
+task default: [:execute]
+
+
+desc "Start Executing the program"
+
+
+task :execute do
+  load_files
+  Conference::Talk.delete_all
+  [
+    {:title => 'Writing Fast Tests Against Enterprise Rails', :time_length => 60}, 
+    {:title => 'Lua for the Masses',     :time_length => 30},
+    {:title => 'Ruby Errors from Mismatched Gem Versions', :time_length => 45},
+    {:title => 'Common Ruby Errors', :time_length => 45},
+    {:title => 'Rails for Python Developers lightning'},
+    {:title => 'Communicating Over Distance', :time_length => 60},
+    {:title => 'Accounting-Driven Development', :time_length => 45},
+    {:title => 'Woah', :time_length => 30},
+    {:title => 'Sit Down and Write', :time_length => 30},
+    {:title => 'Pair Programming vs Noise', :time_length => 45},
+    {:title => 'Rails Magic', :time_length => 60},
+    {:title => 'Ruby on Rails: Why We Should Move On', :time_length => 60},
+    {:title => 'Clojure Ate Scala (on my project)', :time_length => 45},
+    {:title => 'Programming in the Boondocks of Seattle', :time_length => 30},
+    {:title => 'Ruby vs. Clojure for Back-End Development', :time_length => 30},
+    {:title => 'Ruby on Rails Legacy App Maintenance', :time_length => 60},
+    {:title => 'A World Without HackerNews', :time_length => 30},
+    {:title => 'User Interface CSS in Rails Apps', :time_length => 30}
+  ].each do |proposal|
+    Conference::Talk.create!(proposal)
+  end
+end
+
+
+def load_files
+  Dir['*.rb'].each do |file|
+    require File.join(File.dirname(__FILE__), file)
+  end  
+end
+
+  #Conference::Talk.lightning
