@@ -30,6 +30,7 @@ task :execute do
   ].each do |proposal|
     Conference::Talk.create!(proposal)
   end
+  Conference::ConferenceManager.new().schedule_conference
 end
 
 

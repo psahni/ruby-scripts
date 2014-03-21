@@ -12,8 +12,10 @@ ActiveRecord::Base.establish_connection(
 
 ActiveRecord::Schema.define do 
   create_table :talks, :force => true do |t|
-    t.string  :title
-    t.integer :time_length
+    t.string   :title
+    t.integer  :time_length
+    t.datetime :scheduled_at
+    t.timestamps
   end
 end
 
@@ -32,10 +34,10 @@ module Conference
       if self.time_length > max_talk_time_length
         self.add(:time_length, "Can't be greater than #{ max_talk_time_length }'")
       end
-    end
+    end    
     
-    def schedule
-      Scheduler.schedule(self)
+    def scheduled?
+      !scheduled_at.blank?    
     end
     
     def set_time_length
