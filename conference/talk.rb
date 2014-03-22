@@ -18,7 +18,9 @@ module Conference
     
     before_validation :set_time_length, :if => :lightning_talk?
     
-    
+
+    attr_accessor :scheduled_at
+
     def length_of_time
       if self.time_length > max_talk_time_length
         self.add(:time_length, "Can't be greater than #{ max_talk_time_length }'")
@@ -45,7 +47,15 @@ module Conference
     def max_talk_time_length
       240
     end
-    
+
+    def display
+      if scheduled_at
+        [self.scheduled_at.to_s(:conference_time_format), self.title, (lightning_talk? ? "" : "%dmin"%self.time_length)].join(" ")
+      else
+        "#{ talk.title } is not scheduled"
+      end
+    end
+
   end
 
 #-----------------------------------------------------------------------------

@@ -28,19 +28,19 @@ module Conference
       talk_list = schedule_evening_sessions()
       #p talk_list.collect(&:time_length)  # Only lightning talk left here
       #schedule_left_sessions()
-      p "morning sessions"
-      morning_talk_list.each do |list|
-         p list.collect(&:id)
-      end
+      #p "morning sessions"
+      #morning_talk_list.each do |list|
+      #   p list.collect(&:time_length)
+      #end
 
 
       #p  @current_talk_list
       schedule_left_sessions() unless @current_talk_list.blank?
       #p @current_talk_list
-      p 'evening sessions'
-      evening_talk_list.each do |list|
-         p list.collect(&:time_length)
-      end
+      #p 'evening sessions'
+      #evening_talk_list.each do |list|
+      #   p list.collect(&:time_length)
+      #end
     end
 
     def talks
@@ -71,7 +71,7 @@ module Conference
     end
 
     def schedule_left_sessions()
-       evening_talk_list.each do |list|
+       evening_talk_list.reverse.each do |list|
           list_time = list.inject(0){|sum, talk| sum+=talk.time_length}
           @current_talk_list.each do |talk|
             if( talk.time_length + list_time <= 240)
@@ -83,6 +83,11 @@ module Conference
        end
 
     end
+
+    def total_days
+      (total_time_of_talks/min_available_talks_time_in_a_day)
+    end
+
 
     #
     #PRIVATE
@@ -113,11 +118,7 @@ private
       end
       talks_combinations
     end 
-  
-    
-    def total_days
-      (total_time_of_talks/min_available_talks_time_in_a_day)
-    end
+
 
     # 6 Hours = 6*60 mins
     def min_available_talks_time_in_a_day

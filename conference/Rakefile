@@ -10,7 +10,8 @@ task :execute do
   load_schema
   Conference::Talk.delete_all
   [
-    {:title => 'Writing Fast Tests Against Enterprise Rails', :time_length => 60}, 
+    {:title => 'Writing Fast Tests Against Enterprise Rails', :time_length => 60},
+    {:title => 'Overdoing it in Python', :time_length => 45},
     {:title => 'Lua for the Masses',     :time_length => 30},
     {:title => 'Ruby Errors from Mismatched Gem Versions', :time_length => 45},
     {:title => 'Common Ruby Errors', :time_length => 45},
@@ -38,7 +39,9 @@ end
 task :display do
   load_files
   establish_connection
-  Conference::ConferenceManager.new().schedule_conference
+  @c_manager = Conference::ConferenceManager.new()
+  @c_manager.schedule_conference
+  @c_manager.display_conference_schedule
 end
 
   def establish_connection
