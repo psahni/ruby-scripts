@@ -39,7 +39,7 @@ module Conference
       #p @current_talk_list
       p 'evening sessions'
       evening_talk_list.each do |list|
-         p list.collect(&:id)
+         p list.collect(&:time_length)
       end
     end
 
@@ -48,7 +48,7 @@ module Conference
     end
 
     def schedule_morning_sessions
-     Talk.update_all("scheduled=0")
+     #Talk.update_all("scheduled=0")
      talks_combinations = @current_talk_list
      total_days.times do
        talks_combinations = find_possible_combination(talks_combinations, true)
