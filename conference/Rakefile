@@ -1,4 +1,9 @@
 
+require 'active_record'
+require 'sqlite3'
+require 'logger'
+
+
 task default: [:execute]
 
 desc "Start Executing the program"
@@ -45,29 +50,37 @@ task :display do
   @c_manager.display_conference_schedule
 end
 
-  def establish_connection
-    ActiveRecord::Base.establish_connection(
-        :adapter => "sqlite3",
-        :database => 'conference.db'
-    )
-  end
+task :drop_database do
+  FileUtils.rm_f(db_config[:database])
+end
 
-  def load_schema
-    ActiveRecord::Schema.define do
-      create_table :talks, :force => true do |t|
-        t.string   :title
-        t.integer  :time_length
-        t.boolean  :scheduled, :default => false
-        t.timestamps
-      end
+def establish_connection
+  ActiveRecord::Base.establish_connection(db_config)
+end
+
+def db_config
+  {
+   :adapter => "sqlite3",
+   :database => 'conference.db'
+  }
+end
+
+def load_schema
+  ActiveRecord::Schema.define do
+    create_table :talks, :force => true do |t|
+      t.string   :title
+      t.integer  :time_length
+      t.boolean  :scheduled, :default => false
+      t.timestamps
     end
   end
+end
 
 
- def load_files
+def load_files
   Dir['*.rb'].each do |file|
     require File.join(File.dirname(__FILE__), file)
-  end  
+  end
 end
 
   #Conference::Talk.lightning

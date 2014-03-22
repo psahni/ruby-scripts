@@ -2,11 +2,6 @@
 # Talk:
 # This is a model class which is used to store and fetch proposals
 
-require 'active_record'
-require 'sqlite3'
-require 'logger'
-
-
 
 module Conference
 
@@ -25,7 +20,7 @@ module Conference
 
     def length_of_time
       if self.time_length > max_talk_time_length
-        self.add(:time_length, "Can't be greater than #{ max_talk_time_length }'")
+        self.errors.add(:time_length, "can't be greater than #{ max_talk_time_length }'")
       end
     end    
     
