@@ -1,0 +1,199 @@
+#      @talks.each do |talk|
+#        next if talk.scheduled?
+#        if((talk.time_length > max_available_time_limit) || ((talk.time_length + total_time) > max_available_time_limit) )
+#          next
+#        end
+#        total_time+=talk.time_length
+#        if total_time == max_available_time_limit
+#        end
+#      end  
+
+for i in 0..@talks.length-1 do |talk|
+        current_time_length = 0
+        start = i
+        while(start <= (@talks.length-1) ) do
+          start+=1
+          current_time_length+=talk.time_length
+          talks_scheduled << talk
+          if current_time_length == max_available_time_limit 
+            break
+          end
+        end
+
+
+      end
+
+        days_scheduled, total_time, day_to_cover = 0,0,1
+           talks_scheduled = []
+           while day_to_cover <= total_days
+             talks_scheduled = map_talks_to_session(day_to_cover, max_available_time_limit)
+
+             day_to_cover+=1
+           end
+
+
+             def map_talks_to_session(day_to_cover, time_limit)
+                 current_time_length = 0
+                 talks_scheduled = []
+                 for i in 0..(talks.length-1) do
+                   if talk.time_length > time_limit || ( current_time_length + talk.time_length ) > time_limit
+                     next
+                   end
+                   current_time_length+=talk.time_length
+                   talks_scheduled << talk
+                   if current_time_length == time_limit
+                     return talks_scheduled
+                   end
+                 end
+                talks_scheduled
+              end
+
+
+
+
+#    min_session_time_limit = 180
+#     max_session_time_limit = 240
+#     if morning_session
+#      max_session_time_limit = min_session_time_limit
+#     end
+#     talk_list_size = talks.size()
+#     possible_combination_of_talks = []
+#     possible_combination_count = 0
+#      for i in 0..(talk_list_size-1) do
+#        start_point = i
+#        total_time = 0
+#        possible_combination_list = []
+#        while(start_point < talk_list_size)
+#          current_talk = talks[start_point]
+#          if current_talk.scheduled?
+#            next
+#          end
+#          if(current_talk.time_length > max_session_time_limit || (current_talk.time_length+total_time) > max_session_time_limit )
+#            next
+#          end
+#          possible_combination_of_talks << current_talk
+#          total_time+=current_talk.time_length
+#
+#          if(morning_session)
+#            if(total_time == max_session_time_limit)
+#             break
+#            end
+#          else
+#            if(total_time >= min_session_time_limit)
+#              break
+#            end
+#          end
+#        end
+#      end
+
+
+ p 'combination'
+      p talks_to_schedule.collect(&:time_length)
+      current_time_length, start = 0,0
+      for i in 0..(talks_to_schedule.length-1) do
+
+        while(current_time_length > time_limit && start < (i-1)) do
+          p 'time'
+          p current_time_length
+          p 'start'
+          p start
+          current_time_length = current_time_length - talks_to_schedule[start].time_length
+          start+=1
+        end
+        if( current_time_length == time_limit )
+          #puts "Talks = #{ talks[start..i-1]}"
+          p 'Got'
+          p talks_to_schedule[start..i-1].collect(&:time_length)
+          return talks_to_schedule[start..i-1]
+        end
+        if(i < talks_to_schedule.length)
+          current_time_length = current_time_length + talks_to_schedule[i].time_length
+        end
+      end
+
+
+         def find_possible_combination(talks_to_schedule, days, morning_session)
+            talks_to_schedule = talks_to_schedule.sort_by(&:time_length)
+
+            min_time_limit = 180
+            max_time_limit = 240
+            if morning_session
+              max_time_limit = 180
+            end
+            talks_combinations = []
+            days_count = 0
+
+            talks_to_schedule.each_with_index do |talk, i|
+              start = i
+              total_time = 0
+              current_talk_list = []
+
+              while(start!=talks_to_schedule.size()) do
+                start+=1
+                if(talk.time_length > max_time_limit || (total_time + talk.time_length) > max_time_limit)
+                  next
+                end
+
+                current_talk_list << talk
+                total_time+=talk.time_length
+
+                if morning_session
+                  if total_time == max_time_limit
+                    break
+                  end
+                else
+                  if total_time >= min_time_limit
+                    break
+                  end
+                end
+
+              end
+
+              valid_session = false
+              if morning_session
+                valid_session = (total_time == max_time_limit)
+              else
+                valid_session = (total_time >= min_time_limit && total_time <= max_time_limit)
+              end
+
+              if valid_session
+                talks_combinations << current_talk_list
+                current_talk_list.each do |talk|
+                  talk.update_attribute(:scheduled, true)
+                end
+                days_count+=1
+                if(days_count == days)
+                  break
+                end
+              end
+
+            end
+            return  talks_combinations
+          end
+
+
+
+
+
+
+
+
+          ===========
+
+             # p talks.collect(&:id)
+               talks_scheduled = find_possible_combination(talks, total_days, true)
+               talks_scheduled.each do |talks|
+                p talks.collect(&:id)
+               end
+              # p 'received'
+               #p talks_scheduled.collect(&:time_length)
+               #talks_scheduled = talks.reject{|talk| talks_scheduled.include?(talk) }
+               #p talks_scheduled.collect(&:id)
+               #p talks_scheduled
+              # talks_scheduled = find_possible_combination(talks_scheduled, max_available_time_limit)
+               #p 'received'
+               p talks_scheduled
+               #talks_scheduled.each do |talk|
+               #  talk.update_attribute(:scheduled, true)
+               #end
+

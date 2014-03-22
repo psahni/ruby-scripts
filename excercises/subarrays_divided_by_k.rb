@@ -28,8 +28,8 @@ def get_sub_arrays2(arr)
   for i in 0..arr.length-1 do
    #p "Value = #{ arr[i] } "  
    #p s
-   s=(s+arr[i])%14
-   
+   s=(s+arr[i])%26
+   p
    hash[s] = hash[s] + 1
   end
   # p hash
@@ -44,5 +44,5 @@ end
 #arr = [4, 5, 0, -2, -3, 1]
 arr = [10, 12,13, 9, 4, 14, 5]
 
-p get_sub_arrays2(arr)
+p get_sub_arrays2(arr.sort)
 

@@ -1,31 +1,20 @@
-# Proposal:
+#
+#Talk:
 # This is a model class which is used to store and fetch proposals
+
 require 'active_record'
 require 'sqlite3'
 require 'logger'
 
-ActiveRecord::Base.establish_connection(
-  :adapter => "sqlite3",
-  :database => 'conference.db'
-)
 
-
-ActiveRecord::Schema.define do 
-  create_table :talks, :force => true do |t|
-    t.string   :title
-    t.integer  :time_length
-    t.datetime :scheduled_at
-    t.timestamps
-  end
-end
-
-ActiveRecord::Base.logger = Logger.new(STDOUT)
 
 module Conference
 
+#-----------------------------------------------------------------------------
+
   class Talk < ActiveRecord::Base
     validates :title, :time_length, :presence => true
-    validates :length_of_time, :on => :create
+    validate :length_of_time, :on => :create
     
     before_validation :set_time_length, :if => :lightning_talk?
     
@@ -36,8 +25,8 @@ module Conference
       end
     end    
     
-    def scheduled?
-      !scheduled_at.blank?    
+    def already_scheduled?
+      scheduled
     end
     
     def set_time_length
@@ -58,4 +47,7 @@ module Conference
     end
     
   end
+
+#-----------------------------------------------------------------------------
+
 end

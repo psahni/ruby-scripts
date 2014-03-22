@@ -1,12 +1,13 @@
 
 task default: [:execute]
 
-
 desc "Start Executing the program"
-
 
 task :execute do
   load_files
+  ActiveRecord::Base.logger = Logger.new(STDOUT)
+  establish_connection
+  load_schema
   Conference::Talk.delete_all
   [
     {:title => 'Writing Fast Tests Against Enterprise Rails', :time_length => 60}, 
@@ -30,11 +31,36 @@ task :execute do
   ].each do |proposal|
     Conference::Talk.create!(proposal)
   end
-  Conference::ConferenceManager.new().schedule_conference
+  #Conference::ConferenceManager.new().schedule_conference
 end
 
 
-def load_files
+task :display do
+  load_files
+  establish_connection
+  Conference::ConferenceManager.new().schedule_conference
+end
+
+  def establish_connection
+    ActiveRecord::Base.establish_connection(
+        :adapter => "sqlite3",
+        :database => 'conference.db'
+    )
+  end
+
+  def load_schema
+    ActiveRecord::Schema.define do
+      create_table :talks, :force => true do |t|
+        t.string   :title
+        t.integer  :time_length
+        t.boolean  :scheduled, :default => false
+        t.timestamps
+      end
+    end
+  end
+
+
+ def load_files
   Dir['*.rb'].each do |file|
     require File.join(File.dirname(__FILE__), file)
   end  

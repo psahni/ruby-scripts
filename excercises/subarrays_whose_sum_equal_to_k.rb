@@ -28,9 +28,9 @@ def subarray(arr, sum)
   start = 0
   for i in 1..(arr.length-1) do
     #p curr_sum
-    while( (curr_sum > sum) && start < (i - 1) ) do
+    while( (curr_sum > sum)) do
        curr_sum = curr_sum - arr[start]
-       p start
+       #p start
        start =  start+1
     end
    
@@ -48,5 +48,6 @@ def subarray(arr, sum)
   puts "No Sub Array has been found"
 end
 
-arr = [10, 12,13, 9, 4, 14, 5]
-subarray(arr, 14)
+arr = [5, 60, 45, 30, 30, 45, 60, 60, 45, 30, 30, 60, 30, 30]
+
+subarray(arr, 180)
