@@ -1,5 +1,5 @@
 #
-#Talk:
+# Talk:
 # This is a model class which is used to store and fetch proposals
 
 require 'active_record'
@@ -13,13 +13,15 @@ module Conference
 #-----------------------------------------------------------------------------
 
   class Talk < ActiveRecord::Base
-    validates :title, :time_length, :presence => true
-    validate :length_of_time, :on => :create
-    
-    before_validation :set_time_length, :if => :lightning_talk?
-    
 
     attr_accessor :scheduled_at
+
+    before_validation :set_time_length
+
+    validates :title, :presence => true
+    validates_presence_of :time_length,  :message => "must be in mins or lightning"
+    validate :length_of_time, :on => :create, :unless => lambda{|obj| obj.time_length.blank? }
+    
 
     def length_of_time
       if self.time_length > max_talk_time_length
@@ -32,7 +34,11 @@ module Conference
     end
     
     def set_time_length
-      self.time_length = 5
+      if lightning_talk?
+        self.time_length = 5
+      else
+        self.time_length = Integer($1) if self.title.match(/([\d]+)mins?$/)
+      end
     end
     
     def self.lightning
@@ -50,7 +56,7 @@ module Conference
 
     def display
       if scheduled_at
-        [self.scheduled_at.to_s(:conference_time_format), self.title, (lightning_talk? ? "" : "%dmin"%self.time_length)].join(" ")
+        [self.scheduled_at.to_s(:conference_time_format), self.title].join(" ")
       else
         "#{ talk.title } is not scheduled"
       end
