@@ -10,14 +10,37 @@ module Conference
 
     def initialize
       @current_talk_list = talks
+      @morning_talk_list, @evening_talk_list = [], []
+    end
+
+    def morning_talk_list
+      @morning_talk_list
+    end
+
+    def evening_talk_list
+      @evening_talk_list
     end
 
     def schedule
       return if no_talk
       talk_list = schedule_morning_sessions()
-    #  p talk_list.collect(&:id)
+     # p talk_list.collect(&:id)
       talk_list = schedule_evening_sessions()
-    #  p talk_list.collect(&:time_length)  # Only lightning talk left here
+      #p talk_list.collect(&:time_length)  # Only lightning talk left here
+      #schedule_left_sessions()
+      p "morning sessions"
+      morning_talk_list.each do |list|
+         p list.collect(&:id)
+      end
+
+
+      #p  @current_talk_list
+      schedule_left_sessions() unless @current_talk_list.blank?
+      #p @current_talk_list
+      p 'evening sessions'
+      evening_talk_list.each do |list|
+         p list.collect(&:id)
+      end
     end
 
     def talks
@@ -30,6 +53,7 @@ module Conference
      total_days.times do
        talks_combinations = find_possible_combination(talks_combinations, true)
        #p talks_combinations.collect(&:id)
+       @morning_talk_list << talks_combinations
        talks_combinations = @current_talk_list.reject!{|talk| talks_combinations.include?(talk) } # already scheduled
      end
      talks_combinations
@@ -39,10 +63,24 @@ module Conference
       talks_combinations = @current_talk_list
       total_days.times do
         talks_combinations = find_possible_combination(talks_combinations, false)
-        p talks_combinations.collect(&:time_length)
+       # p talks_combinations.collect(&:time_length)
+        @evening_talk_list << talks_combinations
         talks_combinations = @current_talk_list.reject!{|talk| talks_combinations.include?(talk) } # already scheduled
       end
       talks_combinations
+    end
+
+    def schedule_left_sessions()
+       evening_talk_list.each do |list|
+          list_time = list.inject(0){|sum, talk| sum+=talk.time_length}
+          @current_talk_list.each do |talk|
+            if( talk.time_length + list_time <= 240)
+               list << talk
+               @current_talk_list.reject!{|_talk| talk == _talk}
+            end
+          end
+          return if @current_talk_list.blank?
+       end
 
     end
 
