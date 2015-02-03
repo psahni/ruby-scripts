@@ -1,0 +1,86 @@
+
+require 'active_record'
+require 'sqlite3'
+require 'logger'
+
+
+task default: [:execute]
+
+desc "Start Executing the program"
+
+task :execute do
+  load_files
+  #ActiveRecord::Base.logger = Logger.new(STDOUT)
+  establish_connection
+  load_schema
+  Conference::Talk.delete_all
+  [
+    {:title => 'Writing Fast Tests Against Enterprise Rails 60min'},
+    {:title => 'Overdoing it in Python 45min'},
+    {:title => 'Lua for the Masses 30min'},
+    {:title => 'Ruby Errors from Mismatched Gem Versions 45min'},
+    {:title => 'Common Ruby Errors 45min' },
+    {:title => 'Rails for Python Developers lightning'},
+    {:title => 'Communicating Over Distance 60min'},
+    {:title => 'Accounting-Driven Development 45min'},
+    {:title => 'Woah 30min'},
+    {:title => 'Sit Down and Write 30min'},
+    {:title => 'Pair Programming vs Noise 45min'},
+    {:title => 'Rails Magic 60min'},
+    {:title => 'Ruby on Rails: Why We Should Move On 60min'},
+    {:title => 'Clojure Ate Scala (on my project) 45min'},
+    {:title => 'Programming in the Boondocks of Seattle 30min' },
+    {:title => 'Ruby vs. Clojure for Back-End Development 30min'},
+    {:title => 'Ruby on Rails Legacy App Maintenance 60min'},
+    {:title => 'A World Without HackerNews 30min'},
+    {:title => 'User Interface CSS in Rails Apps 30min'}
+  ].each do |proposal|
+    puts proposal[:title]
+    Conference::Talk.create!(proposal)
+  end
+  #Conference::ConferenceManager.new().schedule_conference
+end
+
+
+task :display do
+  load_files
+  establish_connection
+  @c_manager = Conference::ConferenceManager.new()
+  @c_manager.schedule_conference
+  @c_manager.display_conference_schedule
+end
+
+task :drop_database do
+  FileUtils.rm_f(db_config[:database])
+end
+
+def establish_connection
+  ActiveRecord::Base.establish_connection(db_config)
+end
+
+def db_config
+  {
+   :adapter => "sqlite3",
+   :database => 'conference.db'
+  }
+end
+
+def load_schema
+  ActiveRecord::Schema.define do
+    create_table :talks, :force => true do |t|
+      t.string   :title
+      t.integer  :time_length
+      t.boolean  :scheduled, :default => false
+      t.timestamps
+    end
+  end
+end
+
+
+def load_files
+  Dir['*.rb'].each do |file|
+    require File.join(File.dirname(__FILE__), file)
+  end
+end
+
+  #Conference::Talk.lightning
