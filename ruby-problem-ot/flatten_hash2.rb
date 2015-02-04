@@ -3,19 +3,6 @@ require 'json'
 
 class Hash
 
-#  def flatten!
-#    _self = self   
-#    _self.each_pair do |key, value|
-#      if Array === value
-#        _self[key] =  Array.new
-#        singular = String(key).singularize
-#        value.each do |hash|          
-#          _self[key] << (hash[singular.to_sym] || hash[singular])           
-#        end
-#      end
-#    end
-#  end
-
   def flattenize!
     self.each_pair do |key, value|
       if flatable?(value)
@@ -44,9 +31,9 @@ class Array
   def flattenize!
     self.each do |element|
       case element
-        when Hash
-          element.flattenize!     
-        end
+        when Hash, Array
+          element.flattenize!            
+        end          
     end
   end
 end
@@ -62,7 +49,7 @@ hash = {
 
 #hash.flattenize!
 
-array1 = ['posts', ['car', 'scooter', 'motorcycle'],
+array1 = ['posts', [{users: [{user:{name: 'Prashant'}}, {user: {name: 'Shubhum'}}]}],
      {
          attribute_one: 'foo',
          posts: [{title: 'post1'}, {title: 'post2'}],
