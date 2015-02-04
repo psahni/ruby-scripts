@@ -1,8 +1,9 @@
 require 'active_support/core_ext/string'
 require 'json'
 
-class Hash
 
+class Hash
+  
   def flattenize!
     self.each_pair do |key, value|
       if flatable?(value)
@@ -15,8 +16,9 @@ class Hash
         end
       end
     end
+    self
   end
-  
+
   def flatable?(array_hash)
     if (Array === array_hash && array_hash.all?{|a| a.is_a?(Hash)}) 
      return array_hash.map(&:values).flatten.all?{|v| Hash === v}
@@ -35,17 +37,11 @@ class Array
           element.flattenize!            
         end          
     end
+    self
   end
 end
 
-hash = { 
-  attribute_one: "foo",
-  posts: [
-    { 'post' => { 'name' => "p1", content: "post one" } },
-    { post: { name: "p2", content: "post two" } },
-    { post: { name: "p3", content: "post three" } }
-  ]
-}
+
 
 #hash.flattenize!
 
@@ -61,7 +57,7 @@ array1 = ['posts', [{users: [{user:{name: 'Prashant'}}, {user: {name: 'Shubhum'}
          ]
      }]
 
-puts JSON.pretty_generate(array1.flattenize!)
+#puts JSON.pretty_generate(array1.flattenize!)
 
 hash2 =   {
         attribute_one: 'foo',

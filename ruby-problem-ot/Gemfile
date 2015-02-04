@@ -1,0 +1,8 @@
+raise 'Ruby version must be 1.9.x or onwards' if  RUBY_VERSION.to_f < 1.9
+
+source 'https://rubygems.org'
+
+gem 'activesupport'
+gem 'json'
+gem "rake"
+gem 'rspec'
