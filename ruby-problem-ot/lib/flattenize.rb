@@ -57,7 +57,7 @@ array1 = ['posts', [{users: [{user:{name: 'Prashant'}}, {user: {name: 'Shubhum'}
          ]
      }]
 
-#puts JSON.pretty_generate(array1.flattenize!)
+#p (array1.flattenize!)
 
 hash2 =   {
         attribute_one: 'foo',
