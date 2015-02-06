@@ -4,10 +4,13 @@ task :test => [:spec
 # rake execute or rake
 desc "Executes the flattenize program"
 task :execute do
+  require File.expand_path('examples/example.rb', '.')
   if RUBY_VERSION.to_f < 1.9
     puts "--> Please use ruby version 1.9.x and onwards"
   else
-    sh "ruby lib/flattenize.rb"
+    Example.example_1
+    Example.example_2
+    Example.example_3
   end
 end
 
