@@ -27,7 +27,7 @@ class Subword
     return [error_prefix + "Word longer than 20 characters"] if @word.length > 20
     return [error_prefix + "Number greater than length of word"]  if @word.length < @no.to_i
     return [error_prefix + "Illegal character in number"]    if @no.to_i == 0 || @no.match(/[a-zA-Z]/)
-    return [error_prefix + "Illegal character in word"]      if @word.match(/\d+/)
+    return [error_prefix + "Illegal character in word"]      unless @word.match(/^[a-zA-Z]+$/)
     @word.chars.permutation(@no.to_i).to_a
   end
   
