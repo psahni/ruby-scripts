@@ -1,5 +1,3 @@
-require 'colorize'
-
 class WordReader
 
   def initialize(lines)
@@ -48,14 +46,4 @@ class Subword
   end
   
 end
-
-
-
-def prompt(*args)
-  print(*args)
-  $stdin.readlines
-end
-
-lines = prompt "Input line Press Enter and then Ctrl-D to quit:\n"
-WordReader.new(lines).print_subwords
 
