@@ -1,6 +1,5 @@
 task :default =>  [:execute]
-task :test => [:spec
-]
+task :test => [:spec]
 # rake execute or rake
 desc "Executes the flattenize program"
 task :execute do
