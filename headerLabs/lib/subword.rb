@@ -49,7 +49,7 @@ class Subword
        puts output.message
     else
       output.each do |sword|     
-        puts(Array === sword ? sword.join() : sword)
+        puts sword.join()
       end 
     end   
   end  
