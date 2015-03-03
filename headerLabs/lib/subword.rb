@@ -11,7 +11,7 @@ end
 class WordReader
 
   def initialize(lines)
-    puts "Invalid Input" unless Array === lines
+    raise "Invalid Input" unless Array === lines
     @lines = lines
   end
   
