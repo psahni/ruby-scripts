@@ -1,4 +1,4 @@
 desc "Execute rspec test cases"
-task :spec do
+task :test do
 	sh 'rspec spec/**/*_spec.rb --format nested --color'
 end
