@@ -1,0 +1,104 @@
+Dear Prashant,
+
+
+
+Greetings form HeaderLabs India
+
+
+Job Title	ROR Developer
+Location :	Gurgaon , India
+Experience :	4-6 (In Years)
+Openings :	2
+Industry :	IT-Software / Software Services
+Functional Area :	IT Software 
+Role :	Software Developer
+Job Type :	Permanent
+
+
+
+
+
+Job Description:
+
+We are looking for 4 ROR professionals to create top-quality applications.
+Our Perfect Applicant Has:
+
+At least 1 professional Ruby on Rails project
+At least 1+ decades of ROR growth experience
+Required skill Sets:
+Strong in computer fundamentals
+Experience of working on at least one Ruby on Rails project in an Agile environment (Including killer abilities with Ruby on Rails)
+Hands on Linux and JavaScript
+NGnix deployment and tuning capability
+Familiarity with Memcached/Radis
+Passion for coding, hands on development
+OO design skills, HTML/CSS experience, Mysql, Redis
+Comfortable with Git and Github
+
+
+Company Profile
+
+http://headerlabs.com/
+HeaderLabs is one of the quickest increasing Technical organizations in Delhi-NCR area We create SAAS and Cellular items that are used by a large number of customers. We only do top-notch, top great quality perform. If you are looking for new difficulties, then you should definitely examine us out. Age, Certification, Encounter, no bar. If you have the interest to be the best, and if you like to regularly get over new difficulties, then you are entitled to a chair in our office! We are extremely pleased to be one of the best Technical groups in Delhi-NCR area. Our pay-package is one of the best in the market. But do not implement if you are looking for only cash. We are looking for individuals who like to have fun at perform. Those who really like to innovate and who flourish in fast-paced perform lifestyle are the ones who are fit for HeaderLabs.
+
+
+
+This selection process is going to be in two steps.
+
+Step 01: A written program and this being a remote work we expect the solution as attachment over email.
+
+Step 02: A in house full day visit at Gurgaon office for a more thorough interaction cum selection process  along with team present.
+
+
+==========================
+
+
+
+Step 01:
+
+Computing "subword" combinations.
+
+
+Accept any number of lines of input entered from standard input. 
+
+A valid line contains a word and a number. 
+
+The word comes first, and is up to twenty alphabetic characters (A-Z) in upper or lower case. 
+
+
+A "subword" is a
+The word may be preceeded and followed by any number of blanks. 
+
+The number is a decimal integer greater than zero, and may be followed by any number of blanks or a return. 
+
+
+Input is terminated by EOF character. 
+
+For each input word, print all possible "subwords" that have as many characters as specified by the number. 
+ n-letter word comprised of only characters that are found in the given word. 
+
+If you are familiar with the game Scrabble, it's as though the input word is your pool of letters, and you want to find all possible arrangements of n letters from your pool. .nf 
+
+For example, CAT 2 would produce CA CT AC AT TA TC and DOG 1 would produce D O G and BIRD 3 would produce BIR BID IRD RID DIR RIB ... 
+
+Note, that we are producing combinations WITHOUT replacement, so in the BIRD 3 example, BBB and RRR are NOT possible subwords. 
+
+The output should echo the input line to standard output, followed by the list of subwords, one word per line, left justified. 
+
+Each set of output words should be followed by one blank line. 
+
+The program should respond to invalid input by echoing the input line to the output, and then issuing a one line message indicating the nature of the error:
+
+ "Illegal character in word"
+ "Illegal character in number"
+
+ "Number greater than length of word"
+
+ "Word longer than 20 characters"
+
+After issuing the message, processing should resume with the next input line. When all input has been processed, issue a message indicating the number of input words that were processed (including word with errors) e.g., "End of input encountered, 4 words processed."
+
+
+In case of any issue or doubt, please get in touch over email.
+
+
